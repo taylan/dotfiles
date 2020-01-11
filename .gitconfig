@@ -1,0 +1,65 @@
+[user]
+    name = Taylan Aydinli
+    email = taylanaydinli@gmail.com
+
+#[core]
+#    autocrlf = true
+
+[merge]
+    conflictstyle = diff3
+    # Standard diff is two sets of final changes. This introduces the original text before each side's changes.
+    # https://git-scm.com/docs/git-config#git-config-mergeconflictStyle
+
+[push]
+    default = simple
+
+[status]
+    showUntrackedFiles = all
+    # Sometimes a newly-added folder, since it's only one line in git status, can slip under the radar.
+    # https://git-scm.com/docs/git-config#git-config-statusshowUntrackedFiles
+
+[color]
+    ui = auto
+
+[alias]
+    co = checkout
+    ci = commit
+    cim = commit -m
+    st = status
+    br = branch
+
+    type = cat-file -t
+    dump = cat-file -p
+
+    brclean = remote prune origin
+    prune = fetch --prune
+    undo = reset --soft HEAD^
+    stash-all = stash save --include-untracked
+    last-commit = show --name-only
+
+    changes = diff --name-status -r
+    df = diff --color-words=. --ws-error-highlight=new,old
+    dfs = diff --staged --ws-error-highlight=new,old
+
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+
+    unstage = reset HEAD --
+    stg-all = !git add -u && git add . && git status
+
+    # Amend last commit without modifying commit message
+    amend = "!git log -n 1 --pretty=tformat:%s%n%n%b | git commit -F - --amend"
+
+    # list branches sorted by last modified
+    b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+
+    # list all branches
+    allbr = branch -av
+
+    # list aliases
+    la = "!git config -l | grep alias | cut -c 7-"
+
+    # Find a string but omit strings with lendth over 400 chars
+    find = "!f() { str=${@}; echo $str; git grep -E -e$str --and --not -e '.{400}'; }; f"
+
+    ls = ls-files
