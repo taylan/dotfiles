@@ -32,6 +32,7 @@
     dump = cat-file -p
 
     brclean = remote prune origin
+    brfn = !git co master && git pull && git brclean
     prune = fetch --prune
     undo = reset --soft HEAD^
     stash-all = stash save --include-untracked
