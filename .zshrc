@@ -104,9 +104,15 @@ export HISTFILE=~/.zsh_history  # ensure history file visibility
 export HSTR_CONFIG=hicolor        # get more colors
 bindkey -s "\C-r" "\eqhstr\n"     # bind hstr to Ctrl-r (for Vi mode check doc)
 
+addnrhost()
+{
+    sudo bash -c 'echo "10.13.57.8      fed.d60c.net" >> /etc/hosts'
+}
 
 # Created by `userpath` on 2019-11-12 07:00:38
 export PATH="$PATH:/Users/taylanaydinli/.local/bin"
 
 source /Users/taylanaydinli/Library/Preferences/org.dystroy.broot/launcher/bash/br
+
+eval "$(pyenv init -)"
 
