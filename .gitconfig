@@ -2,9 +2,6 @@
     name = Taylan Aydinli
     email = taylanaydinli@gmail.com
 
-#[core]
-#    autocrlf = true
-
 [merge]
     conflictstyle = diff3
     # Standard diff is two sets of final changes. This introduces the original text before each side's changes.
@@ -12,6 +9,9 @@
 
 [push]
     default = simple
+
+[commit]
+    verbose = true
 
 [status]
     showUntrackedFiles = all
@@ -34,9 +34,11 @@
     brclean = remote prune origin
     brfn = !git co master && git pull && git brclean && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D
     prune = fetch --prune
-    undo = reset --soft HEAD^
+    unstage = reset HEAD    # remove files from index (tracking)
+    uncommit = reset --soft HEAD^    # go back before last commit, with files in uncommitted state
     stash-all = stash save --include-untracked
     last-commit = show --name-only
+    cleanup = !git remote prune origin && git gc && git clean -df && git stash clear
 
     changes = diff --name-status -r
     df = diff --color-words=. --ws-error-highlight=new,old
@@ -45,7 +47,6 @@
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
 
-    unstage = reset HEAD --
     stg-all = !git add -u && git add . && git status
 
     # Amend last commit without modifying commit message
@@ -57,10 +58,13 @@
     # list all branches
     allbr = branch -av
 
-    # list aliases
-    la = "!git config -l | grep alias | cut -c 7-"
-
     # Find a string but omit strings with lendth over 400 chars
     find = "!f() { str=${@}; echo $str; git grep -E -e$str --and --not -e '.{400}'; }; f"
 
     ls = ls-files
+
+    # list all aliases
+    alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+
+[pull]
+    rebase = false
