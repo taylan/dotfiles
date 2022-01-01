@@ -33,6 +33,7 @@
 
     brclean = remote prune origin
     brfn = !git co master && git pull && git brclean && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D
+    brfm = !git co main && git pull && git brclean && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D
     prune = fetch --prune
     unstage = reset HEAD    # remove files from index (tracking)
     uncommit = reset --soft HEAD^    # go back before last commit, with files in uncommitted state
