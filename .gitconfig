@@ -2,16 +2,20 @@
     name = Taylan Aydinli
     email = taylanaydinli@gmail.com
 
+[github]
+  user = taylan
+
 [merge]
     conflictstyle = diff3
-    # Standard diff is two sets of final changes. This introduces the original text before each side's changes.
-    # https://git-scm.com/docs/git-config#git-config-mergeconflictStyle
 
 [push]
     default = simple
 
 [commit]
     verbose = true
+
+[diff]
+    renames = true
 
 [status]
     showUntrackedFiles = all
