@@ -68,7 +68,7 @@ ZSH_THEME="bureau"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git extract)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -112,7 +112,18 @@ addnrhost()
 # Created by `userpath` on 2019-11-12 07:00:38
 export PATH="$PATH:/Users/taylanaydinli/.local/bin"
 
+export PATH="$PATH:/Users/taylanaydinli/.dotnet/tools"
+
 source /Users/taylanaydinli/Library/Preferences/org.dystroy.broot/launcher/bash/br
 
-eval "$(pyenv init -)"
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+
+eval $(thefuck --alias)
+
+export PATH="/usr/local/sbin:$PATH"
+
+source /Users/taylanaydinli/Library/Application Support/org.dystroy.broot/launcher/bash/br
